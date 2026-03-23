@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html lang="nl">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <title>Vensters Veluws Verleden</title>
+    <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css"
+        integrity="sha256-p4NxAoJBhIIN+hmNHrzRCf9tD/miZyoHS5obTRR9BMY=" crossorigin="" />
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet"
+        integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN" crossorigin="anonymous">
+    <link rel="stylesheet" href="style.css">
+    <link href="https://fonts.googleapis.com/css2?family=Nunito:wght@400;700;900&display=swap" rel="stylesheet">
+</head>
+
+<body>
+    <div id="ui-layer" class="p-3 d-flex justify-content-between align-items-start pointer-events-none w-100">
+        <div class="header-box pointer-events-auto shadow-sm d-flex align-items-center">
+            <h1 class="h3 mb-0 title-text me-3">Veluws Verleden</h1>
+            <button id="hard-reset-btn" class="btn btn-sm btn-outline-light rounded-circle shadow-sm" title="Reset Spel"
+                style="width: 35px; height: 35px; padding: 0; display: flex; align-items: center; justify-content: center; font-weight: bold; font-size: 1.2rem;">↻</button>
+        </div>
+        <div class="controls-box d-flex flex-column align-items-end pointer-events-auto gap-2">
+            <div class="progress-box shadow-sm w-100">
+                <span id="progress-text" class="fw-bold fs-6">0 van de 10 ontdekkingen gevonden</span>
+                <div class="progress mt-2" style="height: 12px;">
+                    <div id="progress-bar" class="progress-bar progress-bar-striped progress-bar-animated bg-warning"
+                        role="progressbar" style="width: 0%;" aria-valuenow="0" aria-valuemin="0" aria-valuemax="10">
+                    </div>
+                </div>
+            </div>
+            <button id="reset-zoom"
+                class="btn btn-primary btn-lg shadow-sm w-100 mt-2 d-flex align-items-center justify-content-center">
+                <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="currentColor"
+                    class="bi bi-arrows-fullscreen me-2" viewBox="0 0 16 16">
+                    <path fill-rule="evenodd"
+                        d="M5.828 10.172a.5.5 0 0 0-.707 0l-4.096 4.096V11.5a.5.5 0 0 0-1 0v3.975a.5.5 0 0 0 .5.5H4.5a.5.5 0 0 0 0-1H1.732l4.096-4.096a.5.5 0 0 0 0-.707m4.344 0a.5.5 0 0 1 .707 0l4.096 4.096V11.5a.5.5 0 1 1 1 0v3.975a.5.5 0 0 1-.5.5H11.5a.5.5 0 0 1 0-1h2.768l-4.096-4.096a.5.5 0 0 1 0-.707m0-4.344a.5.5 0 0 0 .707 0l4.096-4.096V4.5a.5.5 0 1 0 1 0V.525a.5.5 0 0 0-.5-.5H11.5a.5.5 0 0 0 0 1h2.768l-4.096 4.096a.5.5 0 0 0 0 .707m-4.344 0a.5.5 0 0 1-.707 0L1.732 1.732V4.5a.5.5 0 0 1-1 0V.525a.5.5 0 0 1 .5-.5H4.5a.5.5 0 0 1 0 1H1.732l4.096 4.096a.5.5 0 0 1 0 .707" />
+                </svg>
+                Terug naar overzicht
+            </button>
+        </div>
+    </div>
+
+    <div id="map"></div>
+
+    <div class="offcanvas offcanvas-end shadow-lg" data-bs-scroll="true" data-bs-backdrop="false" tabindex="-1"
+        id="infoPanel" aria-labelledby="infoPanelLabel">
+        <div class="offcanvas-header text-white">
+            <h2 class="offcanvas-title h4 fw-bold mb-0" id="infoPanelLabel">Titel van het Object</h2>
+            <button type="button" class="btn-close btn-close-white" data-bs-dismiss="offcanvas"
+                aria-label="Sluiten"></button>
+        </div>
+        <div class="offcanvas-body d-flex flex-column">
+            <div
+                class="media-placeholder mb-4 rounded d-flex flex-column justify-content-center align-items-center text-secondary border shadow-sm">
+                <svg xmlns="Afbeelding2.png" width="48" height="48" fill="currentColor" class="bi bi-image mb-2"
+                    viewBox="0 0 16 16">
+                    <path d="M6.002 5.5a1.5 1.5 0 1 1-3 0 1.5 1.5 0 0 1 3 0z" />
+                    <path
+                        d="M2.002 1a2 2 0 0 0-2 2v10a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V3a2 2 0 0 0-2-2h-12zm12 1a1 1 0 0 1 1 1v6.5l-3.777-1.947a.5.5 0 0 0-.577.093l-3.71 3.71-2.66-1.772a.5.5 0 0 0-.63.062L1.002 12V3a1 1 0 0 1 1-1h12z" />
+                </svg>
+                <span class="fw-semibold">Afbeelding of Video</span>
+            </div>
+            <div class="info-content flex-grow-1">
+                <p id="infoText" class="fs-5 text-dark" style="line-height: 1.7;"></p>
+            </div>
+            <button class="btn btn-warning btn-lg w-100 fw-bold shadow-sm mt-4 py-3 minigame-btn" id="startGameBtn">
+                <svg xmlns="http://www.w3.org/2000/svg" width="28" height="28" fill="currentColor"
+                    class="bi bi-controller me-2" viewBox="0 0 16 16">
+                    <path
+                        d="M11.5 6.027a.5.5 0 1 1-1 0 .5.5 0 0 1 1 0zm-1.5 1.5a.5.5 0 1 0 0-1 .5.5 0 0 0 0 1zm2.5-.5a.5.5 0 1 1-1 0 .5.5 0 0 1 1 0zm-1.5 1.5a.5.5 0 1 0 0-1 .5.5 0 0 0 0 1zm-6.5-3h1v1h1v1h-1v1h-1v-1h-1v-1h1v-1z" />
+                    <path
+                        d="M3.051 3.26a.5.5 0 0 1 .354-.613l1.932-.518a.5.5 0 0 1 .62.39c.655-.079 1.35-.117 2.043-.117.72 0 1.443.041 2.12.126a.5.5 0 0 1 .622-.399l1.932.518a.5.5 0 0 1 .306.729c.14.09.266.19.373.297.408.408.78 1.05 1.068 1.772.29.731.493 1.533.603 2.271.11.74.12 1.471.052 2.104-.067.633-.204 1.155-.468 1.532-.265.378-.654.552-1.112.552-.3 0-.687-.042-1.071-.115a6.03 6.03 0 0 1-2.261-.885l-.013-.008a4.99 4.99 0 0 1-1.39-1.144A4.99 4.99 0 0 1 7.994 9h-.008a4.99 4.99 0 0 1-1.39 1.144l-.013.008a6.03 6.03 0 0 1-2.26.885c-.385.073-.772.115-1.072.115-.458 0-.847-.174-1.112-.552-.264-.377-.401-.899-.468-1.532-.068-.633-.058-1.364.052-2.104.11-.738.313-1.54.603-2.271.288-.722.66-1.364 1.068-1.772a5.9 5.9 0 0 1 .373-.297zm2.189-1.036-.005.002-.008.002h-.01a.5.5 0 0 1-.03-.016l-1.352.363a4.93 4.93 0 0 0-.251.21A5.44 5.44 0 0 0 2.5 4.542c-.255.642-.437 1.36-.534 2.015-.098.66-.109 1.258-.051 1.808.056.551.156.914.3 1.117.145.205.358.267.575.267.245 0 .564-.035.91-.098a5.03 5.03 0 0 0 1.954-.785l.008-.006c.4-.3.72-.647.95-1.043.204-.351.488-.747 1.042-.747h.352c.554 0 .838.396 1.042.747.23.396.55.743.95 1.043l.008.006a5.03 5.03 0 0 0 1.954.785c.346.063.665.098.91.098.217 0 .43-.062.575-.267.144-.203.244-.566.3-1.117.058-.55.047-1.148-.051-1.808-.097-.655-.279-1.373-.534-2.015a5.44 5.44 0 0 0-.895-1.734 4.93 4.93 0 0 0-.251-.21h-.01a.5.5 0 0 1-.03.016l-1.352-.363a.5.5 0 0 1-.008-.002l-.005-.002A13.43 13.43 0 0 0 8.004 2c-.676 0-1.35.04-1.99.117-.021.002-.04.005-.06.007z" />
+                </svg>
+                Speel de Minigame!
+            </button>
+        </div>
+    </div>
+
+    <div id="particle-container"></div>
+    <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"
+        integrity="sha256-20nQCchB9co0qIjJZRGuk2/Z9VM+kNiyxNV1lvTlZBo=" crossorigin=""></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"
+        integrity="sha384-C6RzsynM9kWDrMNeT87bh95OGNyZPhcTNXj1NW7RuBCsyN/o0jlpcV8Qyq46cDfL"
+        crossorigin="anonymous"></script>
+    <script src="script.js"></script>
+</body>
+
+</html>

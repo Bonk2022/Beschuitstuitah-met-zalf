@@ -1,0 +1,250 @@
+/* =========================================================================
+   Archeologie Kleurenpalet (Gemeente Apeldoorn / Veluwe sfeer)
+   Aardetinten:  --primary-brown, --secondary-brown
+   Goudgeel:     --gold-yellow
+   Donkergrijs:  --dark-slate
+========================================================================= */
+
+:root {
+    --primary-brown: #5c4331;
+    --secondary-brown: #8a6c52;
+    --gold-yellow: #e6b325;
+    --dark-slate: #2b3035;
+    --light-bg: #f5f1eb;
+}
+
+/* Base Styles */
+body,
+html {
+    margin: 0;
+    padding: 0;
+    height: 100%;
+    font-family: 'Nunito', sans-serif;
+    /* Kindvriendelijk en leesbaar */
+    overflow: hidden;
+    /* Geen scrollbars naast de map */
+    background-color: #111;
+    /* Achtergrond buiten de bounds van de afbeelding */
+}
+
+/* Map en UI Layer Setup */
+#map {
+    width: 100vw;
+    height: 100vh;
+    z-index: 1;
+    /* Map is lowest */
+    background: #111;
+}
+
+#ui-layer {
+    position: absolute;
+    top: 0;
+    left: 0;
+    z-index: 1000;
+    /* UI floats above map */
+}
+
+.pointer-events-none {
+    pointer-events: none;
+    /* Allows clicking through the container */
+}
+
+.pointer-events-auto {
+    pointer-events: auto;
+    /* Buttons and boxes inside container are clickable */
+}
+
+/* =========================================================================
+   UI Overlay Componenten (Hufterproof & Digibord Vriendelijk)
+========================================================================= */
+
+.header-box {
+    background-color: var(--primary-brown);
+    color: white;
+    padding: 1rem 2rem;
+    border-radius: 0 0 20px 0;
+    border-bottom: 5px solid var(--gold-yellow);
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3);
+}
+
+.title-text {
+    font-weight: 900;
+    letter-spacing: 0.5px;
+    font-size: 1.5rem;
+}
+
+.controls-box {
+    width: 350px;
+    /* Mooi breed voor makkelijk aantikken op digibord */
+}
+
+.progress-box {
+    background-color: white;
+    padding: 1.2rem;
+    border-radius: 0 0 0 20px;
+    border-bottom: 5px solid var(--primary-brown);
+}
+
+/* Interactive Buttons */
+.btn-primary {
+    background-color: var(--primary-brown);
+    border-color: var(--primary-brown);
+    font-size: 1.2rem;
+    font-weight: bold;
+    border-radius: 12px;
+    padding: 0.8rem;
+    transition: all 0.2s ease;
+}
+
+.btn-primary:hover,
+.btn-primary:active {
+    background-color: #4a3425 !important;
+    border-color: #4a3425 !important;
+    transform: scale(0.98);
+}
+
+.minigame-btn.btn-warning {
+    background-color: var(--gold-yellow);
+    border-color: var(--gold-yellow);
+    color: #fff;
+    font-size: 1.3rem;
+    border-radius: 12px;
+    transition: all 0.2s ease;
+}
+
+.minigame-btn.btn-warning:hover,
+.minigame-btn.btn-warning:active {
+    background-color: #d4a320 !important;
+    border-color: #d4a320 !important;
+    color: #fff;
+    transform: scale(1.02);
+}
+
+/* Bootstrap Overrides for Offcanvas */
+.offcanvas {
+    border-left: 6px solid var(--primary-brown);
+    width: 450px !important;
+    max-width: 90vw;
+    /* Voor kleine schermen */
+    background-color: var(--light-bg);
+}
+
+.offcanvas-header {
+    background-color: var(--primary-brown) !important;
+    border-bottom: 4px solid var(--gold-yellow);
+}
+
+.media-placeholder {
+    height: 220px;
+    background-color: #e2dacd;
+    border: 2px dashed var(--secondary-brown) !important;
+}
+
+/* =========================================================================
+   Hotspot Markers (Leaflet Custom Icons)
+========================================================================= */
+
+.custom-hotspot {
+    background: transparent;
+    border: none;
+}
+
+.hotspot-icon {
+    width: 48px;
+    height: 48px;
+    background-color: var(--gold-yellow);
+    border: 4px solid white;
+    border-radius: 50%;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.5);
+    position: relative;
+    transition: transform 0.2s;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: white;
+    font-weight: 900;
+    font-size: 24px;
+}
+
+/* Vraagteken voor onontdekte hotspots */
+.hotspot-icon::before {
+    content: '?';
+}
+
+/* Bezochte / Gevonden Hotspots */
+.hotspot-icon.found {
+    background-color: var(--secondary-brown);
+    border-color: #dcdcdc;
+    transform: scale(0.9);
+}
+
+.hotspot-icon.found::before {
+    content: '✓';
+    color: #f0f0f0;
+}
+
+.hotspot-icon:hover {
+    transform: scale(1.15);
+}
+
+/* Pulse Animatie - trekt de aandacht van kinderen */
+.hotspot-icon:not(.found)::after {
+    content: '';
+    position: absolute;
+    top: -10px;
+    left: -10px;
+    right: -10px;
+    bottom: -10px;
+    border-radius: 50%;
+    border: 3px solid var(--gold-yellow);
+    animation: bouncePulse 2s infinite ease-out;
+    opacity: 0;
+}
+
+@keyframes bouncePulse {
+    0% {
+        transform: scale(0.8);
+        opacity: 0.8;
+    }
+
+    100% {
+        transform: scale(1.5);
+        opacity: 0;
+    }
+}
+
+/* =========================================================================
+   Definition of Fun: Particle System
+========================================================================= */
+
+#particle-container {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100vw;
+    height: 100vh;
+    pointer-events: none;
+    z-index: 9999;
+}
+
+.particle {
+    position: absolute;
+    background-color: var(--gold-yellow);
+    border-radius: 50%;
+    opacity: 0;
+    box-shadow: 0 0 10px rgba(255, 215, 0, 0.8);
+    animation: explode 1s cubic-bezier(0.1, 0.8, 0.3, 1) forwards;
+}
+
+@keyframes explode {
+    0% {
+        transform: translate(0, 0) scale(1) rotate(0deg);
+        opacity: 1;
+    }
+
+    100% {
+        transform: translate(var(--tx), var(--ty)) scale(0) rotate(180deg);
+        opacity: 0;
+    }
+}
