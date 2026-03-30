@@ -6,6 +6,69 @@ const hotspotsData = [
         title: "Het Zwaard van Bergsham",
         text: "Tijdens de prehistorie werden bijzondere voorwerpen, zoals dit stenen of bronzen zwaard, meegegeven in het graf. Dit was bedoeld als offer voor de goden of om de doden te beschermen in het hiernamaals. Kun jij je voorstellen hoe zwaar het was om zoiets te maken?"
     },
+    {
+        id: 2,
+        y: 860,
+        x: 1450,
+        title: "De Klokbeker",
+        text: "Kijk goed naar deze pot! Hij heeft de vorm van een omgekeerde klok. Deze prachtige bekers van klei werden versierd met patronen. Ze werden gedronken tijdens belangrijke feesten of met veel respect in het graf geplaatst bij bijzondere mensen."
+    },
+    {
+        id: 3,
+        y: 613,
+        x: 759,
+        title: "Stoomkuilen",
+        text: "Wat gebeurde hier in het zand? In deze ondiepe kuilen werden gloeiend hete stenen gelegd waar ze water overheen gooiden. De hete stoom die daarvan af kwam werd gebruikt voor spirituele reiniging, een soort prehistorische sauna voor rituelen!"
+    },
+    {
+        id: 4,
+        y: 894,
+        x: 941,
+        title: "Het Vroege Landschap",
+        text: "Kijk eens om de grafheuvel heen. De Veluwe zag er duizenden jaren geleden heel anders uit! Er waren veel open plekken en paars bloeiende heidevelden, doordat de eerste boeren en hun dieren het woud langzaam openmaakten."
+    },
+    {
+        id: 5,
+        y: 500,
+        x: 1450,
+        title: "Samen Bouwen",
+        text: "Een grafheuvel werd niet in je eentje gebouwd. Het was een reusachtig project! De hele familie en soms wel het hele dorp hielp mee. Ze stapelden manden vol zand en heideplaggen (stukken grond met gras) netjes op elkaar."
+    },
+    {
+        id: 6,
+        y: 450,
+        x: 550,
+        title: "Kleding van Toen",
+        text: "Mensen in de prehistorie konden niet naar de winkel. Ze maakten hun eigen kleding van dierenhuiden of geweven schapenwol. De kleding moest niet alleen warm zijn, maar ook heel stevig zodat ze niet scheurden tijdens het jagen of werken."
+    },
+    {
+        id: 7,
+        y: 920,
+        x: 520,
+        title: "Vuur Maken",
+        text: "Vuur was van levensbelang! Het werd gebruikt om eten te koken, warm te blijven, en om enge, wilde dieren op afstand te houden in de donkere nacht. Vuur maakten de mensen door stenen tegen elkaar te slaan en vonkjes op te vangen."
+    },
+    {
+        id: 8,
+        y: 1000,
+        x: 1500,
+        title: "Het Begrafenisritueel",
+        text: "Tijdens het begraven van de doden was er waarschijnlijk muziek en dans. Mensen voerden speciale, magische rituelen uit om afscheid te nemen en de goden of geesten goed te stemmen. Zang en het offeren van eten speelden een grote rol."
+    },
+    {
+        id: 9,
+        y: 700,
+        x: 450,
+        title: "Vuursteen Bewerking",
+        text: "Lang voordat mensen brons of ijzer ontdekten, maakten ze gereedschap van vuursteen. Met veel geduld sloegen ze de stenen kapot totdat er vlijmscherpe randjes ontstonden. Zo kregen ze messen, pijlen en schrapers voor dierenhuiden."
+    },
+    {
+        id: 10,
+        y: 350,
+        x: 1100,
+        title: "Sporen in het Zand",
+        text: "Hoe weten archeologen dít allemaal? Ze vinden deze grafheuvels terug door heel goed te kijken naar de kleuren in het zand. Waar vroeger houten palen in de grond stonden die daarna wegrotten, ziet het zand er nu een stuk donkerder uit!"
+    }
    
 ];
 
