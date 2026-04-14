@@ -248,3 +248,36 @@ html {
         opacity: 0;
     }
 }
+
+/* =========================================================================
+   Minigame Overlay & Games
+========================================================================= */
+
+#minigame-container {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100vw;
+    height: 100vh;
+    z-index: 2000;
+    background-color: var(--light-bg);
+    display: flex;
+    flex-direction: column;
+}
+
+#close-minigame-btn {
+    position: absolute;
+    top: 20px;
+    right: 20px;
+    font-size: 1.5rem;
+    z-index: 2010;
+    border-radius: 12px;
+}
+
+.minigame-title {
+    font-family: 'Nunito', sans-serif;
+    color: var(--primary-brown);
+    font-weight: 900;
+    margin-bottom: 2rem;
+    text-align: center;
+}

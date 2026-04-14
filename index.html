@@ -11,6 +11,7 @@
         integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN" crossorigin="anonymous">
     <link rel="stylesheet" href="style.css">
     <link href="https://fonts.googleapis.com/css2?family=Nunito:wght@400;700;900&display=swap" rel="stylesheet">
+    <script src="https://cdn.jsdelivr.net/npm/canvas-confetti@1.6.0/dist/confetti.browser.min.js"></script>
 </head>
 
 <body>
@@ -51,15 +52,10 @@
                 aria-label="Sluiten"></button>
         </div>
         <div class="offcanvas-body d-flex flex-column">
-            <div
-                class="media-placeholder mb-4 rounded d-flex flex-column justify-content-center align-items-center text-secondary border shadow-sm">
-                <svg xmlns="Afbeelding2.png" width="48" height="48" fill="currentColor" class="bi bi-image mb-2"
-                    viewBox="0 0 16 16">
-                    <path d="M6.002 5.5a1.5 1.5 0 1 1-3 0 1.5 1.5 0 0 1 3 0z" />
-                    <path
-                        d="M2.002 1a2 2 0 0 0-2 2v10a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V3a2 2 0 0 0-2-2h-12zm12 1a1 1 0 0 1 1 1v6.5l-3.777-1.947a.5.5 0 0 0-.577.093l-3.71 3.71-2.66-1.772a.5.5 0 0 0-.63.062L1.002 12V3a1 1 0 0 1 1-1h12z" />
-                </svg>
-                <span class="fw-semibold">Afbeelding of Video</span>
+            <div class="media-container mb-4 rounded border shadow-sm overflow-hidden" style="display: none;"
+                id="infoMediaContainer">
+                <img id="infoImage" src="" alt="Informatie afbeelding" class="img-fluid w-100"
+                    style="object-fit: cover; max-height: 250px;">
             </div>
             <div class="info-content flex-grow-1">
                 <p id="infoText" class="fs-5 text-dark" style="line-height: 1.7;"></p>
@@ -76,6 +72,12 @@
             </button>
         </div>
     </div>
+    <div id="minigame-container" class="d-none">
+        <button id="close-minigame-btn" class="btn btn-dark shadow-lg">Sluiten ✖</button>
+        <div id="minigame-content" class="w-100 h-100 d-flex justify-content-center align-items-center flex-column">
+            <!-- Minigame content will be dynamically injected here -->
+        </div>
+    </div>
 
     <div id="particle-container"></div>
     <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"
@@ -83,6 +85,9 @@
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"
         integrity="sha384-C6RzsynM9kWDrMNeT87bh95OGNyZPhcTNXj1NW7RuBCsyN/o0jlpcV8Qyq46cDfL"
         crossorigin="anonymous"></script>
+    <script src="src/opgraving.js"></script>
+    <script src="src/klokbeker.js"></script>
+    <script src="src/dieren.js"></script>
     <script src="script.js"></script>
 </body>
 
