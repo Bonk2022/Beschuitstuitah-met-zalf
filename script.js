@@ -80,7 +80,7 @@ const foundHotspots = new Set(); // Slaat de id's op van ontdekte locaties
 // Leaflet initialisatie
 const map = L.map('map', {
     crs: L.CRS.Simple,
-    minZoom: -1.5,    
+    minZoom: -0.25,    
     maxZoom: 2,      
     zoomDelta: 0.5,   
     zoomSnap: 0.5,
@@ -123,7 +123,7 @@ hotspotsData.forEach(data => {
     marker.on('click', (e) => {
         handleHotspotClick(data, e.originalEvent);
         map.flyTo([data.y, data.x], 1.5, {
-            duration: 1.2,
+            duration: 0.5,
             easeLinearity: 0.25
         });
     });
@@ -181,7 +181,7 @@ resetBtn.addEventListener('click', () => {
     infoPanel.hide();
 
     map.flyToBounds(imageBounds, {
-        duration: 1.5,
+        duration: 0.5,
         easeLinearity: 0.25
     });
 });
